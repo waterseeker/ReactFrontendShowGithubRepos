@@ -1,6 +1,6 @@
 import { Issue } from './Issue'
 
-const RepoData = ({ title, author, parent_repo }:Issue) => {       
+const RepoData = ({ title, user, repository_url }:Issue) => {       
     return (
         <h1>Foo</h1>
     )

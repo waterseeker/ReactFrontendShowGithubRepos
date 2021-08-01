@@ -1,4 +1,4 @@
 export interface Author{
-    username: string;
+    login: string;
     avatar_url: string;
 }
