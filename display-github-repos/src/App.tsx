@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios'
 import { Issue } from './Issue'
+import { setConstantValue } from 'typescript';
+import RepoData from './RepoData';
 
 function App() {
     const [data, setData] = useState<Issue[]>([])
@@ -14,7 +16,12 @@ function App() {
        let combinedResponse = [...firstResponse.data, ...secondResponse.data, ...thirdResponse.data]
        setData(combinedResponse)
     }
-    
+
+    const deleteIssue = (id: number) => {
+        let filteredData = data.filter(issue => issue.id !== id)
+        setData(filteredData)
+    }
+
     useEffect(() => {
         getData()
         // const getData = () => mockData
@@ -22,17 +29,22 @@ function App() {
         console.log(filtered_data)
         setData(filtered_data)
     }, [])
-    const listItems = data.map(item =>
+
+    const listItems = data.map(item =>      
         <div key={item.id}>
-            <p>Title: <a href={item.html_url}>{item.title}</a></p>
-            <p>Author: <a href={item.user.html_url}>{item.user.login}</a></p>
-            <p>Avatar: <a href={item.user.html_url}>{item.user.avatar_url}</a></p>
-            <p>Parent Repo: <a href={item.html_url.split('/issues')[0]}>{item.repository_url}</a></p>
-            <button></button>
+            <RepoData   id={item.id} 
+                        repository_url={item.repository_url} 
+                        title={item.title} 
+                        user={item.user}
+                        pull_request={item.pull_request}
+                        html_url={item.html_url}/>
+            <button onClick={() => {deleteIssue(item.id)}}>Delete Issue</button>
         </div>
       );
-  return (
+
+  return (    
       <div>
+        <h1>Github Issues</h1>
         { listItems }
       </div>
   );
