@@ -24,31 +24,27 @@ function App() {
 
     useEffect(() => {
         getData()
-        // for testing
-        // const getData = () => mockData
         let filtered_data = data.filter(entry => !Boolean(entry.pull_request))
-        console.log(filtered_data)
         setData(filtered_data)
     }, [])
 
     const listItems = data.map(item =>      
-        <div key={item.id}>
+        <div className='container' key={item.id}>
             <RepoData   id={item.id} 
-                        repository_url={item.repository_url} 
                         title={item.title} 
                         user={item.user}
                         pull_request={item.pull_request}
                         html_url={item.html_url}/>
-            <button onClick={() => {deleteIssue(item.id)}}>Delete Issue</button>
+            <button className= 'btn delete_button' onClick={() => {deleteIssue(item.id)}}>Delete Issue</button>
         </div>
       );
 
   return (    
     <div>
         <h1>Github Issues</h1>
-        <div className='cards'>
+        <ul>
             { listItems }
-        </div>
+        </ul>
     </div>
   );
 }
