@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios'
 import { Issue } from './Issue'
-import { setConstantValue } from 'typescript';
 import RepoData from './RepoData';
 
 function App() {
@@ -14,7 +13,8 @@ function App() {
             axios.get(`https://api.github.com/repos/graphql/graphql-js/issues`)
         ])
        let combinedResponse = [...firstResponse.data, ...secondResponse.data, ...thirdResponse.data]
-       setData(combinedResponse)
+       let alphabetizedIssues = combinedResponse.sort((a, b) => (a.title > b.title) ? 1 : -1)
+       setData(alphabetizedIssues)
     }
 
     const deleteIssue = (id: number) => {
@@ -24,6 +24,7 @@ function App() {
 
     useEffect(() => {
         getData()
+        // for testing
         // const getData = () => mockData
         let filtered_data = data.filter(entry => !Boolean(entry.pull_request))
         console.log(filtered_data)
