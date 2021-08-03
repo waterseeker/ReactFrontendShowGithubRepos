@@ -4,7 +4,7 @@ import { Issue } from './Issue'
 const RepoData = ({ html_url, title, user, repository_url, id}:Issue) => {  
     let mainRepoName = html_url.split('/')[4]     
     return (
-        <div key={id}>
+        <div key={id} className='card'>
             <p>Title: <a href={html_url}>{title}</a></p>
             <p>Author: <a href={user.html_url}>{user.login}</a></p>
             <p>Avatar: <a href={user.html_url}>{user.avatar_url}</a></p>

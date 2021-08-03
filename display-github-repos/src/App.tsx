@@ -44,10 +44,12 @@ function App() {
       );
 
   return (    
-      <div>
+    <div>
         <h1>Github Issues</h1>
-        { listItems }
-      </div>
+        <div className='cards'>
+            { listItems }
+        </div>
+    </div>
   );
 }
 
